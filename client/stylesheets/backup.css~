@@ -1,0 +1,32 @@
+.posts, .single-post{
+background:#fff;
+}
+
+.posts .post{
+border-bottom:1px solid #e7eff2;
+}
+
+.post-actions{
+padding:13px 15px;
+}
+
+.post-content .post-upvote .upvote-link{
+border-right:none;
+}
+
+.markdown p{
+font-size:80%;
+}
+
+.grid {
+width:620px;
+margin:auto;
+}
+
+.grid-small{
+width:590px;
+}
+
+form .control-group>label{
+font-size:80%;
+}

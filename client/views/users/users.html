@@ -1,0 +1,91 @@
+<template name="users">
+    <div class="grid">
+      <div class="user-table grid-block">
+      
+      <ul class="nav site-nav desktop">
+      {{#if canView}}
+      <li>
+          <ul role="menu" aria-labelledby="dLabel">
+            <li><a class="top" href="/top">{{i18n "Top Stories"}}</a></li>
+            <li><a class="new" href="/new">{{i18n "Recent Stories"}}</a></li>
+            <li><a class="best" href="/best">{{i18n "Best Stories"}}</a></li>
+            <li><a class="digest" href="/digest">{{i18n "Digest"}}</a></li>
+          </ul>
+
+      </li>
+      {{/if}}
+      {{#if hasCategories}}
+      <li class="dropdown">
+        <a class="categories" href="/">{{i18n "Categories"}}</a>
+        <div class="dropdown-menu">
+          <ul role="menu" aria-labelledby="dLabel">
+            {{# each categories}}
+              <li><a class="pending" href="{{categoryLink}}">{{name}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      </li>
+      {{/if}}
+      {{#if isAdmin}}
+      <li class="">
+        
+          <ul role="menu" aria-labelledby="dLabel">
+            <li><a class="pending" href="/pending">{{i18n "Pending"}}</a></li>
+            <li><a class="users" href="/all-users">{{i18n "Users"}}</a></li>
+            <li><a class="settings" href="/settings">{{i18n "Settings"}}</a></li>
+            <li><a class="categories" href="/categories">{{i18n "Categories"}}</a></li>
+            <li><a class="logs" href="/logs">{{i18n "Logs"}}</a></li>
+            <li><a class="categories" href="/toolbox">{{i18n "Toolbox"}}</a></li>
+          </ul>
+        
+      </li>
+      {{/if}}
+      <li>
+        {{> search}}
+      </li>
+    </ul>
+        <h2>{{i18n "Users"}}</h2>
+        <div class="filter-sort">
+          <p class="filter">
+            <span>{{i18n "Filter by"}}: </span>
+            <a class="{{activeClass 'all'}}" href="{{filterBy 'all'}}">{{i18n "All"}}</a>
+            <a class="{{activeClass 'invited'}}" href="{{filterBy 'invited'}}">{{i18n "Invited"}}</a>
+            <a class="{{activeClass 'uninvited'}}" href="{{filterBy 'uninvited'}}">{{i18n "Uninvited"}}</a>
+            <a class="{{activeClass 'admin'}}" href="{{filterBy 'admin'}}">{{i18n "Admin"}}</a>
+          </p>
+          <p class="sort">
+            <span>{{i18n "Sort by"}}: </span>
+            <a class="{{activeClass 'createdAt'}}" href="{{sortBy 'createdAt'}}">{{i18n "Created"}}</a>
+            <a class="{{activeClass 'karma'}}" href="{{sortBy 'karma'}}">{{i18n "Karma"}}</a>
+            <a class="{{activeClass 'username'}}" href="{{sortBy 'username'}}">{{i18n "Username"}}</a>
+            <a class="{{activeClass 'postCount'}}" href="{{sortBy 'postCount'}}">{{i18n "Posts"}}</a>
+            <a class="{{activeClass 'commentCount'}}" href="{{sortBy 'commentCount'}}">{{i18n "Comments"}}</a>
+            <a class="{{activeClass 'invitedCount'}}" href="{{sortBy 'invitedCount'}}">{{i18n "InvitedCount"}}</a>
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <td colspan="2">{{i18n "Name"}}</td>
+              <td>{{i18n "Member since"}}</td>
+              <td>{{i18n "Posts"}}</td>
+              <td>{{i18n "Comments"}}</td>
+              <td>{{i18n "Karma"}}</td>
+              <td>{{i18n "Invites"}}</td>
+              <td>{{i18n "Invited?"}}</td>
+              <td>{{i18n "Admin?"}}</td>
+              <td>{{i18n "Actions"}}</td>
+            </tr>
+          </thead>
+          <tbody>
+              {{#each users}}
+                {{> user_item}}
+              {{/each}}
+          </tbody>
+        </table>
+        <div class="grid more-button {{#if allPostsLoaded}} hidden {{/if}}">
+          <a class="more-link" href="{{loadMoreUrl}}">{{i18n "Load more"}}</a>
+        </div>
+      </div>
+    </div>
+</template>

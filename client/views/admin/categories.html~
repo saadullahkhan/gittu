@@ -1,0 +1,62 @@
+<template name="categories">
+  <div class="grid-small grid-block dialog admin">
+      <ul class="nav site-nav desktop">
+      {{#if canView}}
+      <li>
+          <ul role="menu" aria-labelledby="dLabel">
+            <li><a class="top" href="/top">{{i18n "Top Stories"}}</a></li>
+            <li><a class="new" href="/new">{{i18n "Recent Stories"}}</a></li>
+            <li><a class="best" href="/best">{{i18n "Best Stories"}}</a></li>
+            <li><a class="digest" href="/digest">{{i18n "Digest"}}</a></li>
+          </ul>
+
+      </li>
+      {{/if}}
+      {{#if hasCategories}}
+      <li class="dropdown">
+        <a class="categories" href="/">{{i18n "Categories"}}</a>
+        <div class="dropdown-menu">
+          <ul role="menu" aria-labelledby="dLabel">
+            {{# each categories}}
+              <li><a class="pending" href="{{categoryLink}}">{{name}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+      </li>
+      {{/if}}
+      {{#if isAdmin}}
+      <li class="">
+        
+          <ul role="menu" aria-labelledby="dLabel">
+            <li><a class="pending" href="/pending">{{i18n "Pending"}}</a></li>
+            <li><a class="users" href="/all-users">{{i18n "Users"}}</a></li>
+            <li><a class="settings" href="/settings">{{i18n "Settings"}}</a></li>
+            <li><a class="categories" href="/categories">{{i18n "Categories"}}</a></li>
+            <li><a class="logs" href="/logs">{{i18n "Logs"}}</a></li>
+            <li><a class="categories" href="/toolbox">{{i18n "Toolbox"}}</a></li>
+          </ul>
+        
+      </li>
+      {{/if}}
+      <li>
+        {{> search}}
+      </li>
+    </ul>
+    <h2>Categories</h2>
+    <form class="form-block">
+      <h3>Add new category</h3>
+      <div class="control-group">
+        <label>Name</label>
+        <div class="controls"><input id="name" type="text" value="" /></div>
+      </div>
+      <div class="form-actions">
+        <input type="submit" class="button" value="Submit" />
+      </div>
+    </form>
+    <ul>
+      {{#each categories}}
+        {{> category_item}}
+      {{/each}}
+    </ul>
+  </div>
+</template>
